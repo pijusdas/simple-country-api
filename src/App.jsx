@@ -11,25 +11,25 @@ const Dropdown = () => {
 
 
   useEffect(() => {
-    fetchCountries();
+    getCountries();
   }, []);
 
   useEffect(() => {
     const getId = countries.find(count => count.name === selectedCountry)
     console.log(getId)
     if (selectedCountry) {
-      fetchStates(getId.id);
+      getStates(getId.id);
     }
   }, [selectedCountry, countries]);
 
   useEffect(() => {
     const getcity = states.find(state => state.name === selectedState)
     if (selectedState) {
-      fetchCities(getcity?.id);
+      getCities(getcity?.id);
     }
   }, [selectedState, states]);
 
-  const fetchCountries = async () => {
+  const getCountries = async () => {
     try {
       const response = await fetch('https://d32sbion19muhj.cloudfront.net/pub/interview/countries');
       const data = await response.json();
@@ -39,7 +39,7 @@ const Dropdown = () => {
     }
   };
 
-  const fetchStates = async (countryId) => {
+  const getStates = async (countryId) => {
     try {
       const response = await fetch(`https://d32sbion19muhj.cloudfront.net/pub/interview/states`);
       const data = await response.json();
@@ -55,7 +55,7 @@ const Dropdown = () => {
 
 
 
-  const fetchCities = async (state) => {
+  const getCities = async (state) => {
     try {
       const response = await fetch('city.json');
       const data = await response.json();
